@@ -33,7 +33,6 @@ set(client_UI_SRCS
     ignorelisteditor.ui
     ignorelisttablewidget.ui
     networksettings.ui
-    synclogdialog.ui
     settingsdialog.ui
     sharedialog.ui
     sharelinkwidget.ui
@@ -103,7 +102,6 @@ set(client_SRCS
     authenticationdialog.cpp
     proxyauthhandler.cpp
     proxyauthdialog.cpp
-    synclogdialog.cpp
     tooltipupdater.cpp
     notificationconfirmjob.cpp
     guiutility.cpp
