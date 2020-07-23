@@ -693,7 +693,7 @@ void AccountSettings::slotEnableVfsCurrentFolder()
 
             // Wipe selective sync blacklist
             bool ok = false;
-            auto oldBlacklist = folder->journalDb()->getSelectiveSyncList(SyncJournalDb::SelectiveSyncBlackList, &ok);
+            const auto oldBlacklist = folder->journalDb()->getSelectiveSyncList(SyncJournalDb::SelectiveSyncBlackList, &ok);
             folder->journalDb()->setSelectiveSyncList(SyncJournalDb::SelectiveSyncBlackList, {});
 
             // Change the folder vfs mode and load the plugin
@@ -1117,7 +1117,6 @@ void AccountSettings::refreshSelectiveSyncStatus()
 
         bool ok = false;
         const auto undecidedList = folder->journalDb()->getSelectiveSyncList(SyncJournalDb::SelectiveSyncUndecidedList, &ok);
-        QString p;
         for (const auto &it : undecidedList) {
             // FIXME: add the folder alias in a hoover hint.
             // folder->alias() + QLatin1String("/")
@@ -1177,7 +1176,7 @@ void AccountSettings::refreshSelectiveSyncStatus()
         auto anim = new QPropertyAnimation(_ui->selectiveSyncStatus, "maximumHeight", _ui->selectiveSyncStatus);
         anim->setEndValue(shouldBeVisible ? hint.height() : 0);
         anim->start(QAbstractAnimation::DeleteWhenStopped);
-        connect(anim, &QPropertyAnimation::finished, [this, shouldBeVisible]() {
+        connect(anim, &QPropertyAnimation::finished, this, [this, shouldBeVisible]() {
             _ui->selectiveSyncStatus->setMaximumHeight(QWIDGETSIZE_MAX);
             if (!shouldBeVisible) {
                 _ui->selectiveSyncStatus->hide();
