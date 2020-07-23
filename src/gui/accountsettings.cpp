@@ -712,6 +712,7 @@ void AccountSettings::slotEnableVfsCurrentFolder()
             FolderMan::instance()->scheduleFolder(folder);
 
             _ui->_folderList->doItemsLayout();
+            _ui->selectiveSyncStatus->setVisible(false);
         };
 
         if (folder->isSyncRunning()) {
